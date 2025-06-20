@@ -1,9 +1,9 @@
 'use client'
-import { useState } from "react"
-import { signIn } from "next-auth/react"
+import { Suspense, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
+import { signIn } from "next-auth/react"
 
-export default function LoginPage() {
+function LoginWithSearchParams() {
   const [error, setError] = useState("")
   const router = useRouter()
   const params = useSearchParams()
@@ -28,11 +28,19 @@ export default function LoginPage() {
       <h1 className="text-2xl mb-4">Login</h1>
       {error && <p className="text-red-500 mb-2">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input name="email" type="email" placeholder="Email" required className="w-full p-2 border"/>
-        <input name="password" type="password" placeholder="Password" required className="w-full p-2 border"/>
+        <input name="email" type="email" placeholder="Email" required className="w-full p-2 border" />
+        <input name="password" type="password" placeholder="Password" required className="w-full p-2 border" />
         <button type="submit" className="w-full bg-blue-500 text-white p-2">Login</button>
       </form>
       <p className="mt-4">Don't have an account? <a href="/register" className="text-blue-500">Register</a></p>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="p-4 text-gray-500">Loading...</div>}>
+      <LoginWithSearchParams />
+    </Suspense>
   )
 }
