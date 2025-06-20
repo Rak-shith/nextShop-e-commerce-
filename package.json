@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -19,12 +19,12 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "24.0.3",
-    "@types/react": "19.1.8",
-    "eslint": "^9",
+    "@eslint/eslintrc": "^3.0.0",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^18.18.6",
+    "@types/react": "^18.2.14",
+    "eslint": "^8.56.0",
     "eslint-config-next": "15.3.3",
-    "tailwindcss": "^4"
+    "tailwindcss": "^3.4.3"
   }
 }
