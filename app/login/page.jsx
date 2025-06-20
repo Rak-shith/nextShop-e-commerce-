@@ -1,10 +1,22 @@
 'use client'
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import { signIn } from "next-auth/react"
 import { useRouter, useSearchParams } from "next/navigation"
 
+function SearchParamsWrapper({ children }) {
+  return <Suspense fallback={null}>{children}</Suspense>
+}
+
 export default function LoginPage() {
-  const [error, setError] = useState("")
+   return (
+    <SearchParamsWrapper>
+      <ActualLoginPage />
+    </SearchParamsWrapper>
+  )
+}
+
+function ActualLoginPage() {
+ const [error, setError] = useState("")
   const router = useRouter()
   const params = useSearchParams()
   const callbackUrl = params.get("callbackUrl") || "/"
