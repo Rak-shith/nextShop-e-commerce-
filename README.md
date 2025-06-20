@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🛍️ nextShop-e-commerce
 
-## Getting Started
+A modern, full-featured E-commerce web application built using **Next.js App Router**, **Tailwind CSS**, **NextAuth.js**, and **Context API**.
 
-First, run the development server:
+---
 
-```bash
+## 🚀 Features
+
+- 🧾 Product listing with detail pages
+- 🛒 Add to cart & wishlist (with context state)
+- ✅ Checkout simulation
+- 🔐 User authentication using **NextAuth.js**
+- 🧑 Responsive mobile-first UI
+- 💾 API routes with app directory support
+
+---
+
+## 🧱 Tech Stack
+
+| Tech             | Purpose                            |
+|------------------|------------------------------------|
+| Next.js 15       | Full-stack React framework         |
+| App Router       | File-based routing + layouts       |
+| Tailwind CSS     | Utility-first modern styling       |
+| Context API      | Cart/Wishlist global state         |
+| NextAuth.js      | Authentication provider            |
+| Vercel           | Hosting and deployment             |
+
+---
+
+## 📁 Project Structure
+
+nextShop-e-commerce/
+├── app/
+│ ├── page.jsx # Home
+│ ├── login/page.jsx # Login
+│ ├── register/page.jsx # Register
+│ ├── cart/page.jsx # Cart
+│ ├── wishlist/page.jsx # Wishlist
+│ ├── checkout/page.jsx # Checkout
+│ ├── products/[id]/page.jsx# Product detail
+│ └── api/ # API Routes
+├── components/ # Reusable UI components
+├── context/ # Cart/Wishlist Context
+├── lib/ # Helper functions
+├── public/images/ # Product images
+├── styles/ # Tailwind + global styles
+├── .env.example # Sample environment config
+├── tailwind.config.js
+├── next.config.js
+├── package.json
+└── README.md
+
+---
+
+## 🛠️ Setup Instructions
+
+### 1. Clone the Project
+
+git git@github.com:Rak-shith/nextShop-e-commerce-.git
+cd nextShop-e-commerce
+
+### 2. Clone the Project
+
+npm install
+
+### 3. Environment Variables
+
+NEXTAUTH_SECRET=your_secret_key
+NEXTAUTH_URL=http://localhost:3000
+
+### 4. Run the Development Server
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Now visit http://localhost:3000 🚀
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 5. Build for Production
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+npm run build
+npm run start
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 👨‍💻 Deployment
 
-To learn more about Next.js, take a look at the following resources:
+Deployed via Vercel. Compatible out of the box.
+link - https://next-shop-e-commerce-nine.vercel.app/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+You’re all set! 💼
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
