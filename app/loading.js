@@ -1,8 +1,8 @@
 
 export default function GlobalLoading() {
   return (
-     <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
-      <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+     <div className="flex justify-center items-center bg-black h-[70vh]">
+      <div className="animate-spin rounded-full h-20 w-20 border-4 border-t-blue-300 border-gray-200"></div>
     </div>
   )
 }
