@@ -34,27 +34,36 @@ export default function CheckoutPage() {
   }, [])
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">Checkout</h1>
-      {cart.length === 0 && <p>Your cart is empty.</p>}
+    <div className="max-w-4xl mx-auto p-8">
+      <h1 className="text-3xl font-bold mb-6">Checkout</h1>
+
+      {cart.length === 0 && (
+        <p className="text-white-600 text-lg">🛒 Your cart is empty.</p>
+      )}
+
       {orderResult ? (
-        <div className="text-green-600">
-          <p>{orderResult.message}</p>
-          <p>Order ID: {orderResult.order.id}</p>
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow mb-6">
+          <p className="font-semibold">{orderResult.message}</p>
+          <p className="text-sm mt-1">Order ID: {orderResult.order.id}</p>
         </div>
       ) : (
         <>
-          <ul>
+          <ul className="divide-y divide-white-200 mb-6 bg-grayDark rounded-md">
             {cart.map((item) => (
-              <li key={item.id} className="mb-2">
-                {item.title} - ${item.price}
+              <li key={item.id} className="flex justify-between items-center p-4">
+                <span className="text-lg font-semibold text-white-800">{item.title}</span>
+                <span className="text-white-600 text-sm">${item.price}</span>
               </li>
             ))}
           </ul>
-          <LocationSelector/>
+
+          <div className="mb-6">
+            <LocationSelector />
+          </div>
+
           <button
             onClick={handleCheckout}
-            className="bg-blue-500 text-white px-4 py-2 mt-4"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded shadow transition"
           >
             Place Order
           </button>

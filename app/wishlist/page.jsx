@@ -24,20 +24,34 @@ export default function WishlistPage() {
   }, [])
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">Your Wishlist</h1>
-      {wishlist.length === 0 && <p>Your wishlist is empty</p>}
-      <ul>
-        {wishlist.map((item, index) => (
-          <li key={`${item.id}-${index}`} className="mb-3 flex justify-between border-b pb-2">
-            <div>
-              <p>{item.title}</p>
-              <p className="text-sm text-gray-500">${item.price}</p>
-            </div>
-            <button onClick={() => removeFromWishlist(item.id)} className="text-red-500">Remove</button>
-          </li>
-        ))}
-      </ul>
+    <div className="max-w-4xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-6">Your Wishlist</h1>
+
+      {wishlist.length === 0 ? (
+        <div className="text-white-600 text-lg">
+          🗒️ Your wishlist is empty.
+        </div>
+      ) : (
+        <ul className="space-y-4">
+          {wishlist.map((item, index) => (
+            <li
+              key={`${item.id}-${index}`}
+              className="flex justify-between items-center bg-grayDark rounded-md p-4 shadow-sm hover:shadow-md transition"
+            >
+              <div>
+                <p className="text-lg font-medium text-white-800">{item.title}</p>
+                <p className="text-sm text-white-500 mt-1">${item.price}</p>
+              </div>
+              <button
+                onClick={() => removeFromWishlist(item.id)}
+                className="text-sm text-red-500 hover:bg-red-50 border border-red-500 px-3 py-1 rounded transition"
+              >
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }

@@ -5,6 +5,10 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { Suspense } from "react";
+import GlobalLoading from "./loading";
+import HeaderSlider from "@/components/HeaderSlider";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,11 +31,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
+        <Toaster />
         <CartProvider>
           <WishlistProvider>
-            <Header />
             <Navbar />
-            <main className="flex-grow">{children}</main>
+              <main className="flex-grow pt-20">{children}</main>
             <Footer />
           </WishlistProvider>
         </CartProvider>

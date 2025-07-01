@@ -7,6 +7,7 @@ export default function MobileMenu({ session }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const links = [
+    { href: '/', label: 'Home' },
     { href: '/cart', label: 'Cart' },
     { href: '/wishlist', label: 'Wishlist' },
     { href: '/checkout', label: 'Checkout' },
@@ -15,7 +16,7 @@ export default function MobileMenu({ session }) {
   return (
     <>
       {/* Desktop Menu */}
-      <div className="hidden md:flex gap-6 items-center text-gray-700 font-medium">
+      <div className="hidden md:flex gap-6 items-center text-white-700 font-medium">
         {links.map(link => (
           <Link key={link.href} href={link.href} className="hover:text-blue-600 transition">
             {link.label}

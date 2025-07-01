@@ -10,7 +10,7 @@ export default function ProductCard({ product }) {
   const { addToWishlist } = useWishlist()
 
   return (
-    <div className="bg-white border rounded-lg shadow-md p-4 hover:shadow-lg transition">
+    <div className="bg-grayDark shadow-md p-4 hover:shadow-lg transition">
       {/* Product Image */}
       <div className="w-full aspect-square overflow-hidden rounded mb-4 flex items-center justify-center bg-gray-100">
          <Link
@@ -20,20 +20,21 @@ export default function ProductCard({ product }) {
           alt={product.title}
           width={300}
           height={300}
+          loading="lazy"
           className="object-contain h-full"
         />
         </Link>
       </div>
 
       {/* Product Info */}
-      <h3 className="text-lg font-semibold text-gray-800 truncate">{product.title}</h3>
-      <p className="text-blue-600 font-bold text-xl mt-1 mb-3">${product.price}</p>
+      <h3 className="text-lg font-semibold text-white-800 truncate">{product.title}</h3>
+      <p className="text-blue-400 font-bold text-xl mt-1 mb-3">${product.price}</p>
 
       {/* Actions */}
       <div className="flex flex-wrap gap-2 mb-2">
         <button
           onClick={() => handleAddCart(product, addToCart)}
-          className="flex-1 bg-green-600 text-white text-sm px-4 py-2 rounded hover:bg-green-700 transition"
+          className="flex-1 bg-accent text-white text-sm px-4 py-2 rounded hover:bg-green-700 transition"
         >
           Add to Cart
         </button>

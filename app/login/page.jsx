@@ -2,6 +2,7 @@
 import { Suspense, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { signIn } from "next-auth/react"
+import toast from "react-hot-toast"
 
 function LoginWithSearchParams() {
   const [error, setError] = useState("")
@@ -19,8 +20,13 @@ function LoginWithSearchParams() {
       callbackUrl
     })
 
-    if (res.error) setError("Invalid email or password")
-    else window.location.href = callbackUrl
+    if (res.error){
+      toast.error("Please enter valid email or password")
+      setError("Invalid email or password")
+    }else {
+      toast.success("Logged in successfully!")
+      window.location.href = callbackUrl
+    }
   }
 
   return (
