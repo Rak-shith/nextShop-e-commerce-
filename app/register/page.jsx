@@ -1,6 +1,7 @@
 'use client'
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { registerUser } from "../server/authAction"
 
 export default function RegisterPage() {
   const [error, setError] = useState("")
@@ -9,17 +10,14 @@ export default function RegisterPage() {
   async function handleSubmit(e) {
     e.preventDefault()
     setError("")
-    const res = await fetch('/api/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: e.target.email.value,
-        password: e.target.password.value
-      })
-    })
+    const formData = new FormData(e.target)
+    const result = await registerUser(formData)
 
-    if (!res.ok) setError(await res.text())
-    else router.push('/login')
+    if (result?.error) {
+      setError(result.error)
+    } else {
+      router.push("/login")
+    }
   }
 
   return (

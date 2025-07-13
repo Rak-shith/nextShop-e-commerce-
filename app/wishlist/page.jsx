@@ -1,22 +1,33 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-hot-toast'
+import { getAllwishlistItems, removeFromwishlistItem } from '../server/wishlistAction'
 
 export default function WishlistPage() {
   const [wishlist, setWishlist] = useState([])
 
   const fetchWishlist = async () => {
-    const res = await fetch('/api/wishlist')
-    const data = await res.json()
-    setWishlist(data)
+    try {
+      const items = await getAllwishlistItems()
+      setWishlist(items)
+    } catch (err) {
+      console.error('[FETCH_WISHLIST_ERROR]', err)
+    }
   }
 
   const removeFromWishlist = async (id) => {
-    await fetch('/api/wishlist', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id }),
-    })
-    fetchWishlist()
+   try {
+      let res = await removeFromwishlistItem(id)
+      if (res.error === 'Unauthorized') {
+        toast.error('Please log in to remove items from your wishlist')
+      } else {
+        toast.success('Item removed from wishlist')
+      }
+      fetchWishlist(); // Refresh list
+    } catch (error) {
+      toast.error('Something went wrong');
+      console.error('wishlist Delete Error:', error);
+    }
   }
 
   useEffect(() => {

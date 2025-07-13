@@ -1,74 +1,80 @@
-'use client'
-import LocationSelector from '@/components/LocationSelector'
-import { useEffect, useState } from 'react'
+"use client";
+import { useEffect, useState } from "react";
+import LocationSelector from "@/components/LocationSelector";
+import toast from "react-hot-toast";
+import { placeOrder } from "../server/orderAction";
+import { useRouter } from "next/navigation";
+import { getAllCartItems } from "../server/cartAction";
 
 export default function CheckoutPage() {
-  const [cart, setCart] = useState([])
-  const [orderResult, setOrderResult] = useState(null)
+  const [cart, setCart] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const fetchCart = async () => {
-    const res = await fetch('/api/cart')
-    const data = await res.json()
-    setCart(data)
-  }
+    try {
+      const items = await getAllCartItems();
+      setCart(items);
+    } catch (err) {
+      console.error("[FETCH_CART_ERROR]", err);
+    }
+  };
 
   const handleCheckout = async () => {
-    const res = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        cart,
-        customer: {
-          name: 'Guest User',
-          email: 'guest@example.com',
-        },
-      }),
-    })
-
-    const result = await res.json()
-    setOrderResult(result)
-  }
+    setLoading(true);
+    try {
+      const result = await placeOrder(cart, {
+        name: "Guest User",
+        email: "guest@example.com",
+      });
+      toast.success("Order placed successfully!");
+      if (result?.order?.id) {
+        router.push(`/order-success/${result.order.id}`);
+      }
+    } catch (error) {
+      toast.error("Checkout failed");
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    fetchCart()
-  }, [])
+    fetchCart();
+  }, []);
+
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * (item.quantity || 1),
+    0
+  );
 
   return (
-    <div className="max-w-4xl mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-6">Checkout</h1>
+    <div className="p-4 max-w-4xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6">Checkout</h1>
 
-      {cart.length === 0 && (
-        <p className="text-white-600 text-lg">🛒 Your cart is empty.</p>
-      )}
-
-      {orderResult ? (
-        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow mb-6">
-          <p className="font-semibold">{orderResult.message}</p>
-          <p className="text-sm mt-1">Order ID: {orderResult.order.id}</p>
-        </div>
+      {cart.length === 0 ? (
+        <p>Your cart is empty.</p>
       ) : (
         <>
-          <ul className="divide-y divide-white-200 mb-6 bg-grayDark rounded-md">
+          <ul className="space-y-3 mb-6">
             {cart.map((item) => (
-              <li key={item.id} className="flex justify-between items-center p-4">
-                <span className="text-lg font-semibold text-white-800">{item.title}</span>
-                <span className="text-white-600 text-sm">${item.price}</span>
+              <li key={item.id} className="bg-grayDark p-3 rounded">
+                {item.title} - ₹{item.price}
               </li>
             ))}
           </ul>
 
-          <div className="mb-6">
-            <LocationSelector />
-          </div>
+          <p className="text-lg font-semibold mb-4">Total: ₹{total}</p>
+
+          <LocationSelector />
 
           <button
             onClick={handleCheckout}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded shadow transition"
+            disabled={loading}
+            className="bg-blue-600 text-white mt-4 px-5 py-2 rounded hover:bg-blue-700"
           >
-            Place Order
+            {loading ? "Placing Order..." : "Place Order"}
           </button>
         </>
       )}
     </div>
-  )
+  );
 }

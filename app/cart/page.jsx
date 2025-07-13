@@ -1,22 +1,33 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-hot-toast'
+import { getAllCartItems, removeFromCartItem } from '../server/cartAction'
 
 export default function CartPage() {
   const [cart, setCart] = useState([])
 
   const fetchCart = async () => {
-    const res = await fetch('/api/cart')
-    const data = await res.json()
-    setCart(data)
+    try {
+      const items = await getAllCartItems()
+      setCart(items)
+    } catch (err) {
+      console.error('[FETCH_CART_ERROR]', err)
+    }
   }
 
   const removeFromCart = async (id) => {
-    await fetch('/api/cart', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id }),
-    })
-    fetchCart()
+    try {
+      let res = await removeFromCartItem(id)
+      if (res.error === 'Unauthorized') {
+        toast.error('Please log in to remove items from your cart')
+      } else {
+        toast.success('Item removed from cart')
+      }
+      fetchCart(); // Refresh list
+  } catch (error) {
+    toast.error('Something went wrong');
+    console.error('Cart Delete Error:', error);
+  }
   }
 
   useEffect(() => {
