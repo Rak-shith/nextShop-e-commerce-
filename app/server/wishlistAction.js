@@ -45,18 +45,19 @@ export async function addTowishlistItem({ productId }) {
 }
 
 // DELETE - Remove from wishlist
-export async function removeFromwishlistItem(id) {
+export async function removeFromwishlistItem(formData) {
   const session = await getServerSession(authOptions)
   const userId = session?.user?.email || 'guest'
 
    if (!userId) return { error:'Unauthorized'}
 
+  const id = formData.get('id');
   await prisma.wishlistItem.delete({
     where: {
       id,
     },
   });
 
-  // revalidatePath('/wishlist');
+  revalidatePath('/wishlist');
   return { message: "Removed" };
 }

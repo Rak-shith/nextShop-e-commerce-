@@ -45,18 +45,19 @@ export async function addToCartItem({ productId, quantity = 1 }) {
 }
 
 // DELETE - Remove from cart
-export async function removeFromCartItem(id) {
+export async function removeFromCartItem(formData) {
   const session = await getServerSession(authOptions)
   const userId = session?.user?.email || 'guest'
 
    if (!userId) return { error:'Unauthorized'}
 
+  const id = formData.get('id')
   await prisma.cartItem.delete({
     where: {
       id,
     },
   });
 
-  // revalidatePath('/cart');
+  revalidatePath('/cart');
   return { message: "Removed" };
 }
