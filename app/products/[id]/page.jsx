@@ -1,6 +1,5 @@
 import ProductActions from '@/components/ProductActions'
-import { handleAddCart, handleAddWishlist } from '@/lib/cartWishlistHelpers'
-import { getProductById } from '@/lib/products'
+import { getProductById } from '@/app/server/productAction'
 import Image from 'next/image'
 
 export default async function ProductDetail({ params }) {

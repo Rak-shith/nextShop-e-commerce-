@@ -1,6 +1,4 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import { CartProvider } from "@/context/CartContext";
-import { WishlistProvider } from "@/context/WishlistContext";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -32,13 +30,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <Toaster />
-        <CartProvider>
-          <WishlistProvider>
-            <Navbar />
-              <main className="flex-grow pt-20">{children}</main>
-            <Footer />
-          </WishlistProvider>
-        </CartProvider>
+          <Navbar />
+            <main className="flex-grow pt-20">{children}</main>
+          <Footer />
       </body>
     </html>
   );

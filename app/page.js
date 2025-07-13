@@ -1,4 +1,4 @@
-import { getAllProducts } from "@/lib/products";
+import { getAllProducts } from "@/app/server/productAction";
 import ProductCard from "@/components/ProductCard";
 import { Suspense } from "react";
 import GlobalLoading from "./loading";
