@@ -9,11 +9,11 @@ export default async function Navbar() {
 
   return (
     <Suspense>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black border-b p-4 shadow px-6 md:px-16 lg:px-32 mb-6">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-50 dark:bg-grayDark light:bg-stone-50 border-b p-4 shadow px-6 md:px-16 lg:px-32 mb-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link
             href="/"
-            className="text-2xl font-bold text-blue-600 tracking-tight hover:opacity-90 transition"
+            className="text-2xl font-bold text-blue-600 tracking-tight hover:opacity-90"
           >
             NextShop
           </Link>

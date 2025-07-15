@@ -17,7 +17,7 @@ export default async function WishlistPage() {
           {items.map((item, index) => (
             <li
               key={`${item.id}-${index}`}
-              className="flex justify-between items-center bg-grayDark rounded-md p-4 shadow-sm hover:shadow-md transition"
+              className="flex justify-between items-center dark:bg-grayDark rounded-md p-4 shadow-sm hover:shadow-md transition"
             >
               <div>
                 <p className="text-lg font-medium text-white-800">{item.title}</p>

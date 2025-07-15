@@ -14,7 +14,7 @@ export default function ProductActions({ product }) {
       </button>
       <button
         onClick={() => handleAddWishlist(product)}
-        className="border border-gray-400 px-6 py-2 rounded hover:bg-gray-100 transition"
+        className="border border-gray-400 px-6 py-2 rounded hover:bg-gray-400 transition"
       >
         Add to Wishlist
       </button>

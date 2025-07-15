@@ -1,12 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import { Suspense } from "react";
-import GlobalLoading from "./loading";
-import HeaderSlider from "@/components/HeaderSlider";
 import { Toaster } from "react-hot-toast";
+import { ThemeProvider } from "@/components/Theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,10 +26,12 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
+        <ThemeProvider>
         <Toaster />
           <Navbar />
             <main className="flex-grow pt-20">{children}</main>
           <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

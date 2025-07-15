@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Bars3Icon, XMarkIcon, UserIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid'
+import { ModeToggle } from './ThemeSetter'
 
 export default function MobileMenu({ session }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -34,6 +35,7 @@ export default function MobileMenu({ session }) {
             <UserIcon className="h-5 w-5" />
           </Link>
         )}
+        <ModeToggle/>
       </div>
 
       {/* Mobile Toggle Button */}
@@ -49,8 +51,8 @@ export default function MobileMenu({ session }) {
 
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-white border-t shadow-md z-50 md:hidden">
-          <div className="flex flex-col gap-4 px-6 py-4 text-gray-700 font-medium">
+        <div className="absolute top-16 left-0 w-full bg-white dark:bg-grayDark border-t shadow-md z-50 md:hidden">
+          <div className="flex flex-col gap-4 px-6 py-4  font-medium">
             {links.map(link => (
               <Link
                 key={link.href}

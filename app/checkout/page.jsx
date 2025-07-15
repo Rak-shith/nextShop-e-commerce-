@@ -20,7 +20,7 @@ export default async function CheckoutPage() {
         <>
           <ul className="space-y-3 mb-6">
             {items.map((item) => (
-              <li key={item.id} className="bg-grayDark p-3 rounded">
+              <li key={item.id} className="dark:bg-grayDark p-3 rounded">
                 {item.title} - ${item.price}
               </li>
             ))}

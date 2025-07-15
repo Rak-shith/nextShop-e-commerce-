@@ -16,7 +16,7 @@ export default async function CartPage() {
           {items.map((item, index) => (
             <div
               key={`${item.id}-${index}`}
-              className="flex items-center justify-between rounded-lg p-4 shadow-sm bg-grayDark hover:shadow-md transition space-y-4"
+              className="flex items-center justify-between rounded-lg p-4 shadow-sm dark:bg-grayDark hover:shadow-md transition space-y-4"
             >
               <div>
                 <h2 className="text-lg font-semibold text-white-800">

@@ -6,7 +6,7 @@ import { handleAddCart, handleAddWishlist } from "@/lib/cartWishlistHelpers"
 export default function ProductCard({ product }) {
 
   return (
-    <div className="bg-grayDark shadow-md p-4 hover:shadow-lg transition">
+    <div className="dark:bg-grayDark shadow-md p-4 hover:shadow-lg transition">
       {/* Product Image */}
       <div className="w-full aspect-square overflow-hidden rounded mb-4 flex items-center justify-center bg-gray-100">
          <Link
@@ -30,7 +30,7 @@ export default function ProductCard({ product }) {
       <div className="flex flex-wrap gap-2 mb-2">
         <button
           onClick={() => handleAddCart(product)}
-          className="flex-1 bg-accent text-white text-sm px-4 py-2 rounded hover:bg-green-700 transition"
+          className="flex-1 border border-blue-500 text-blue-500 text-sm px-4 py-2 rounded hover:bg-slate-900 transition"
         >
           Add to Cart
         </button>

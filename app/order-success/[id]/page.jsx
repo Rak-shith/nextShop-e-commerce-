@@ -9,7 +9,7 @@ export default async function OrderSuccess({ params }) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-grayDark rounded-lg shadow-md mt-10">
+    <div className="max-w-4xl mx-auto p-8 dark:bg-grayDark rounded-lg shadow-md mt-10">
       <h1 className="text-3xl font-bold text-green-600 mb-4">🎉 Thank you for your order!</h1>
       <p className="text-white-600 mb-6">Your order <span className="font-semibold text-white">#{order.id}</span> has been placed successfully.</p>
 
