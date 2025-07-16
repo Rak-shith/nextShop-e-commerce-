@@ -26,6 +26,13 @@ export default function RegisterPage() {
       {error && <p className="text-red-500 mb-2">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
+          name="name"
+          type="text"
+          placeholder="Enter your name"
+          required
+          className="w-full p-2 border"
+        />
+        <input
           name="email"
           type="email"
           placeholder="Email"

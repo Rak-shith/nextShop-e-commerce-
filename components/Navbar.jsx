@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import MobileMenu from "./MobileMenu";
 import { Suspense } from "react";
+import { ModeToggle } from "./ThemeSetter";
 
 export default async function Navbar() {
   const session = await getServerSession(authOptions);
@@ -18,6 +19,9 @@ export default async function Navbar() {
             NextShop
           </Link>
           <MobileMenu session={session} />
+          <div className="hidden md:flex items-center">
+            <ModeToggle />
+          </div>
         </div>
       </nav>
     </Suspense>

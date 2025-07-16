@@ -7,7 +7,7 @@ export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
-      credentials: { email: {}, password: {} },
+      credentials: { name: {}, email: {}, password: {} },
       async authorize(credentials) {
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
@@ -15,7 +15,7 @@ export const authOptions = {
         console.log('Login Email:', credentials.email)
         console.log('User Found:', user)
         if (user && await bcrypt.compare(credentials.password, user.password)) {
-          return { id: user.id, email: user.email };
+          return { id: user.id, name: user.name, email: user.email };
         }
         return null
       }

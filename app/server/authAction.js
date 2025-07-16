@@ -4,11 +4,12 @@ import bcrypt from 'bcrypt'
 import { prisma } from '@/lib/prisma'
 
 export async function registerUser(formData) {
+  const name = formData.get('name')
   const email = formData.get('email')
   const password = formData.get('password')
 
-  if (!email || !password) {
-    return { error: 'Email and password are required' }
+  if (!name || !email || !password) {
+    return { error: 'Name, email and password are required' }
   }
 
   const existingUser = await prisma.user.findUnique({ where: { email } })
@@ -21,6 +22,7 @@ export async function registerUser(formData) {
 
   const user = await prisma.user.create({
     data: {
+      name,
       email,
       password: hashed,
     },
