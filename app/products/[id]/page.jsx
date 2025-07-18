@@ -3,7 +3,8 @@ import { getProductById } from '@/app/server/productAction'
 import Image from 'next/image'
 
 export default async function ProductDetail({ params }) {
-  const product = await getProductById(params.id)
+  const { id } = await params;
+  const product = await getProductById(id);
 
   if (!product) {
     return <div className="p-4 text-red-500 text-lg">Product not found.</div>
@@ -26,7 +27,7 @@ export default async function ProductDetail({ params }) {
         <p className="text-gray-600 text-lg mb-6">{product.description}</p>
         <p className="text-2xl font-semibold text-blue-600 mb-6">${product.price}</p>
 
-        <ProductActions product={product} />
+        <ProductActions productId={product.id} />
       </div>
     </div>
   )

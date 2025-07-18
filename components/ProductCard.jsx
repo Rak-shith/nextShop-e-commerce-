@@ -1,7 +1,6 @@
-"use client"
 import Image from "next/image"
 import Link from "next/link"
-import { handleAddCart, handleAddWishlist } from "@/lib/cartWishlistHelpers"
+import ProductActions from "./ProductActions";
 
 export default function ProductCard({ product }) {
 
@@ -26,22 +25,7 @@ export default function ProductCard({ product }) {
       <h3 className="text-lg font-semibold text-white-800 truncate">{product.title}</h3>
       <p className="text-blue-400 font-bold text-xl mt-1 mb-3">${product.price}</p>
 
-      {/* Actions */}
-      <div className="flex flex-wrap gap-2 mb-2">
-        <button
-          onClick={() => handleAddCart(product)}
-          className="flex-1 border border-blue-500 text-blue-500 text-sm px-4 py-2 rounded hover:bg-slate-900 transition"
-        >
-          Add to Cart
-        </button>
-
-        <button
-          onClick={() => handleAddWishlist(product)}
-          className="flex-1 border border-blue-500 text-blue-500 text-sm px-4 py-2 rounded hover:bg-blue-50 transition"
-        >
-          ❤️ Wishlist
-        </button>
-      </div>
+      <ProductActions productId={product.id} />
 
       <Link
         href={`/products/${product.id}`}
